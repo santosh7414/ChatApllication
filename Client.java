@@ -16,11 +16,9 @@ import javax.swing.SwingConstants;
 public class Client extends JFrame {
 
     Socket socket;
-
     BufferedReader br;
     PrintWriter out;
 
-    //declare component
     private JLabel heading=new JLabel("Client Area");
     private JTextArea messageArea=new JTextArea();
     private JTextField messageInput=new JTextField();
@@ -38,7 +36,6 @@ public class Client extends JFrame {
             createGUI();
             handleEvents();
             startReading();
-                       // startWriting();
             
                     } catch (final Exception e){
             
@@ -59,9 +56,7 @@ public class Client extends JFrame {
 
                         @Override
                         public void keyReleased(KeyEvent e) {
-                            // System.out.println("key released "+e.getKeyCode());
                             if(e.getKeyCode() == 10) {
-                                //System.out.println("you have presses enter button");
                                 String contentToSend=messageInput.getText();
                                 messageArea.append("Me :"+contentToSend+"\n");
                                 out.println(contentToSend);
@@ -77,14 +72,12 @@ public class Client extends JFrame {
             
                 private void createGUI()
     {
-        //GUI Code
 
         this.setTitle("Client Messager[END]");
         this.setSize(600,700);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        // coding for component
         heading.setFont(font);
         messageArea.setFont(font);
         messageInput.setFont(font);
@@ -93,10 +86,8 @@ public class Client extends JFrame {
         messageInput.setHorizontalAlignment(SwingConstants.CENTER);
         heading.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         messageArea.setEditable(false);
-        // set the frame layout
         this.setLayout(new BorderLayout());
 
-        //adding the components to frame
         this.add(heading,BorderLayout.NORTH);
         JScrollPane jScrollPane=new JScrollPane(messageArea);
         this.add(jScrollPane, BorderLayout.CENTER);
@@ -105,10 +96,8 @@ public class Client extends JFrame {
         this.setVisible(true);
     }
 
-    // start reading method
     public void startReading()
     {
-        // thread-read is given
         final Runnable r1=()->{
 
             System.out.println("reader started...");
@@ -123,7 +112,6 @@ public class Client extends JFrame {
                 socket.close();
                 break;
             }
-                //System.out.println("Server : "+msg);
                 messageArea.append("Server : "+ msg+"\n");
             }catch(final Exception e) 
             {
@@ -135,7 +123,6 @@ public class Client extends JFrame {
     new Thread(r1).start();
 }
 public void startWriting(){
-    // thread - data user take & send the client 
     final Runnable r2=()->{
         System.out.println("Writer started...");
         while(true)
