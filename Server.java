@@ -10,14 +10,7 @@ class Server
     
     BufferedReader br;
     PrintWriter out;
-
-    // declare contents
-    //private JLabel heading=new JLabel("Client Area");
-   // private JTextArea messageArea=new JTextArea();
-   // private JTextField messageInput=new JTextField();
-    //private Font font=new Font("ITALIC",Font.PLAIN,20);
-
-//constructor 
+    
     public Server(){
         try{
             server=new ServerSocket(7778);
@@ -37,7 +30,6 @@ class Server
     }
     public void startReading()
     {
-        // thread-read is given
         Runnable r1=()->{
 
             System.out.println("reader started...");
@@ -60,7 +52,6 @@ class Server
 }
 
 public void startWriting(){
-        // thread - data user take & send the client 
         Runnable r2=()->{
             System.out.println("Writer started...");
             while(true)
